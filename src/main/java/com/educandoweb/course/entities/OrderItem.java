@@ -28,6 +28,8 @@ public class OrderItem {
         this.price = price;
     }
 
+    // No Java EE o que vale é o getOrder, esse getOrder estava chamando o pedido associado a esse orderItem
+    // e o orderItem chamava o pedido, então ficava em um loop infinito
     @JsonIgnore
     public Order getOrder() {
         return id.getOrder();

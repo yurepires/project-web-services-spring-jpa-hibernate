@@ -69,6 +69,13 @@ public class TestConfig implements CommandLineRunner {
         OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 
         orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
+        // Para salvar o objeto dependente (do lado da opcionalidade) na relação OneToOne
+        // Você não chama o repository do própio objeto, na verdade, você salva o objeto que
+        // está relacionado a ele, que assim o JPA vai fazer o trabalho de salvar este objeto
+        Payment pay1 = new Payment(null, o1.getMoment().plusSeconds(7200), o1);
+        o1.setPayment(pay1);
+        orderRepository.save(o1);
     }
 
 }
