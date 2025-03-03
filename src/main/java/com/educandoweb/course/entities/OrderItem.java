@@ -63,6 +63,12 @@ public class OrderItem {
         this.price = price;
     }
 
+    // Na plataforma Java Enterprise o que vale é o get, por isso, para aparecer o subtotal no json
+    // O método vai ser nomeado getSubTotal e não subTotal.
+    public Double getSubTotal() {
+        return price * quantity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

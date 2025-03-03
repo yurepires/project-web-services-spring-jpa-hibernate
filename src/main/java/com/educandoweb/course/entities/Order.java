@@ -2,7 +2,6 @@ package com.educandoweb.course.entities;
 
 import com.educandoweb.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -77,7 +76,6 @@ public class Order {
         this.client = client;
     }
 
-    @JsonIgnore
     public Payment getPayment() {
         return payment;
     }
@@ -88,6 +86,12 @@ public class Order {
 
     public Set<OrderItem> getItems() {
         return items;
+    }
+
+    public Double getTotal() {
+        return items.stream()
+                .map(OrderItem::getSubTotal)
+                .reduce(0.0, Double::sum);
     }
 
     @Override
